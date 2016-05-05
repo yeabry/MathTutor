@@ -4,7 +4,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Scanner;
 import java.util.Random;
 
 /**
@@ -28,12 +27,10 @@ public class Test extends JFrame {
         prepareGUI();
     }
 
-
     public static void main(String[] args){
         Test test = new Test();
         test.getDifficultyType();
     }
-
 
     private void prepareGUI(){
         frame = new JFrame("Math Tutor");
@@ -58,7 +55,6 @@ public class Test extends JFrame {
         frame.setVisible(true);
     }
 
-
     public void getDifficultyType(){
 
         headerLabel.setText("Please select difficulty type");
@@ -71,7 +67,6 @@ public class Test extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 choice = 1;
                 getMathType(choice);
-                //statusLabel.setText("Easy Button clicked.");
             }
 
         });
@@ -80,7 +75,6 @@ public class Test extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 choice = 2;
                 getMathType(choice);
-                //statusLabel.setText("Medium Button clicked.");
 
             }
         });
@@ -89,7 +83,6 @@ public class Test extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 choice = 3;
                 getMathType(choice);
-               //statusLabel.setText("Hard Button clicked.");
             }
         });
 
@@ -99,10 +92,6 @@ public class Test extends JFrame {
         controlPanel.add(hard);
         frame.setVisible(true);
     }
-
-
-
-
 
 
     public void getMathType(int i) {
@@ -118,8 +107,6 @@ public class Test extends JFrame {
             System.out.println("Selected Hard");
         }
 
-        headerLabel.setText("Please select difficulty type");
-
         JButton addition = new JButton("Addition");
         JButton subtraction = new JButton("Subtration");
         JButton multiply = new JButton("Multiplication");
@@ -128,71 +115,95 @@ public class Test extends JFrame {
         addition.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mathType = 1;
-                if(choice == 1) {
-                    addition(randomNumber(1), randomNumber(1));
-                } else if (choice == 2) {
-                    addition(randomNumber(2), randomNumber(2));
-                } else {
-                    addition(randomNumber(3), randomNumber(3));
-                }
 
-                addition(5, 5);
-                //statusLabel.setText("Medium Button clicked.");
+                for (int i = 0; i < 10; i++)
+                    if (choice == 1) {
+                        addition(randomNumber(1), randomNumber(1));
+                    } else if (choice == 2) {
+                        addition(randomNumber(2), randomNumber(2));
+                    } else {
+                        addition(randomNumber(3), randomNumber(3));
+                    }
+                printReport();
 
             }
         });
 
-
-
-
-
         subtraction.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mathType = 2;
-                getMathType(choice);
-                //statusLabel.setText("Medium Button clicked.");
-
+                for (int i = 0; i < 10; i++)
+                    if (choice == 1) {
+                        subtraction(randomNumber(1), randomNumber(1));
+                    } else if (choice == 2) {
+                        subtraction(randomNumber(2), randomNumber(2));
+                    } else {
+                        subtraction(randomNumber(3), randomNumber(3));
+                    }
+                printReport();
             }
         });
 
         multiply.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mathType = 3;
-                getMathType(choice);
-                //statusLabel.setText("Medium Button clicked.");
+                for (int i = 0; i < 10; i++)
+                    if (choice == 1) {
+                        multiplication(randomNumber(4), randomNumber(4));
+                    } else if (choice == 2) {
+                        multiplication(randomNumber(5), randomNumber(5));
+                    } else {
+                        multiplication(randomNumber(6), randomNumber(6));
+                    }
+                printReport();
 
             }
         });
-
 
         division.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 mathType = 4;
-                getMathType(choice);
-                //statusLabel.setText("Medium Button clicked.");
+                int a;
+                int b;
+
+                for (int i = 0; i < 10; i++) {
+                    if (choice == 1) {
+                        do {
+                            a = randomNumber(4);
+                            b = randomNumber(4);
+                        } while (!isEvenlyDivisable(a, b));
+                        division(a, b);
+                    } else if (choice == 2) {
+                        do {
+                            a = randomNumber(5);
+                            b = randomNumber(5);
+                        } while (!isEvenlyDivisable(a, b));
+                        division(a, b);
+                    } else {
+                        do {
+                            a = randomNumber(6);
+                            b = randomNumber(6);
+                        } while (!isEvenlyDivisable(a, b));
+                        division(a, b);
+                    }
+                }
+                printReport();
 
             }
         });
-
-
-
 
         newControlPanel.add(addition);
         newControlPanel.add(subtraction);
         newControlPanel.add(multiply);
         newControlPanel.add(division);
-
-
         frame.setVisible(true);
     }
-
 
     private JPanel createNewPanel() {
         JPanel localJPanel = new JPanel();
         localJPanel.setLayout(new FlowLayout());
         return localJPanel;
     }
-
 
     public void addition(int num1, int num2) {
         String textChoice2 = JOptionPane.showInputDialog("What is " + num1 + " + " + num2 + "? ");
@@ -222,25 +233,24 @@ public class Test extends JFrame {
     public void multiplication(int num1, int num2) {
         String textChoice5 = JOptionPane.showInputDialog("What is " + num1 + " * " + num2 + "? ");
         int answer = Integer.parseInt(textChoice5);
-        if (num1 * num2 == answer)
-        {
+        if (num1 * num2 == answer) {
             numCorrect++;
         }
     }
 
-    public void division(int num1, int num2, int num3) {
-        boolean quotientCorrect = false;
-        num3 = num1*num2;
-        String textChoice6 = JOptionPane.showInputDialog("What is the quotient of " + num3 + " / " + num1 + "? ");
-        int answer = Integer.parseInt(textChoice6);
-        if (answer == num3/num1);
-        {
-            quotientCorrect = true;
-        }
-
-        if (quotientCorrect)
-        {
-            numCorrect++;
+    public void division(int num1, int num2) {
+        if (num1 > num2) {
+            String textChoice3 = JOptionPane.showInputDialog("What is " + num1 + " / " + num2 + "? ");
+            int answer = Integer.parseInt(textChoice3);
+            if (num1 / num2 == answer) {
+                numCorrect++;
+            }
+        } else {
+            String textChoice4 = JOptionPane.showInputDialog("What is " + num2 + " / " + num1 + "? ");
+            int answer = Integer.parseInt(textChoice4);
+            if (num2 / num1 == answer) {
+                numCorrect++;
+            }
         }
     }
 
@@ -249,17 +259,54 @@ public class Test extends JFrame {
             return (int)rand.nextInt(50) +1;
         } else if (c == 2) {
             return (int)rand.nextInt(90) +10;
-        } else {
+        } else if (c == 3) {
             return (int)rand.nextInt(900) +100;
+        } else if (c == 4) {
+            return (int)rand.nextInt(12) +1;
+        } else if (c == 5) {
+            return (int)rand.nextInt(40) +10;
+        } else {
+            return (int)rand.nextInt(990) +10;
         }
 
 
     }
 
 
+    public boolean isEvenlyDivisable(int a, int b) {
+        return a % b == 0;
+    }
 
 
 
+    public void printReport() {
+        double win = 10.0;
+        double percent = numCorrect / win * 100;
 
+        if (percent < 75) {
+            if (mathType == 1)
+                statusLabel.setText("<html>Number of correct responses: " + numCorrect + "/" + 10 + "\n" +
+                        "Your percentage: " + percent + "% <br/>" +
+                        "Please see your teacher for help with Addition</html>");
+            else if (mathType == 2)
+                statusLabel.setText("<html>Number of correct responses: " + numCorrect + "/" + 10 + "<br/>" +
+                        "Your percentage: " + percent + "% <br/>" +
+                        "Please see your teacher for help with Subtraction</html>");
+            else if (mathType == 3)
+                statusLabel.setText("<html>Number of correct responses: " + numCorrect + "/" + 10 + "<br/>" +
+                        "Your percentage: " + percent + "% <br/>" +
+                        "Please see your teacher for help with Multiplication</html>");
+            else {
+                statusLabel.setText("<html>Number of correct responses: " + numCorrect + "/" + 10 + "<br/>" +
+                        "Your percentage: " + percent + "% <br/>" +
+                        "Please see your teacher for help with Division</html>");
+            }
+            if (percent > 75) {
+                statusLabel.setText("<html>Number of correct responses: " + numCorrect + "/" + 10 + "<br/>" +
+                        "Your percentage: " + percent + "% <br/>" +
+                        "Good Job!</html>");
+            }
+        }
+    }
 
 }
